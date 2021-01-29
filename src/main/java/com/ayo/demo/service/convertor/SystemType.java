@@ -1,6 +1,6 @@
 package com.ayo.demo.service.convertor;
 
-public enum UnitType {
+public enum SystemType {
     IMPERIAL,
     METRIC
 }
