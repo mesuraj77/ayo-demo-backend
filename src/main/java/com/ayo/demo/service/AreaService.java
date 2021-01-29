@@ -12,8 +12,8 @@ public class AreaService implements Convertor {
     /**
      * This function is used to convert area from Imperial (Acre) into Metric (Hectare)
      *
-     * @param acreValue an are in Imperial unit (Acre)
-     * @return an Imperial unit (Hectare) equivalent value rounded to two decimal places
+     * @param acreValue an area in Imperial unit (Acre)
+     * @return a Metric unit (Hectare) equivalent value rounded to two decimal places
      *
      */
     @Override
@@ -24,7 +24,7 @@ public class AreaService implements Convertor {
     /**
      * This function is used to convert area from Metric (Hectare) into Imperial (Acre)
      *
-     * @param hectareValue an are in Metric unit (Hectare)
+     * @param hectareValue an area in Metric unit (Hectare)
      * @return an Imperial unit (Acre) equivalent value rounded to two decimal places
      *
      */

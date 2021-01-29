@@ -31,7 +31,7 @@ public class ConvertorService {
                     convertedValue = convertor.convertToImperial(inputValue);
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown Unit Type, the accepted inputs are "
+                    throw new RuntimeException("Unknown Unit Type, the accepted inputs are "
                             + UnitType.METRIC.name() + " and " + UnitType.IMPERIAL.name());
             }
 
