@@ -22,12 +22,12 @@ public class WeightServiceTest {
 
     @Test
     public void when_convertingAWeightInKilogram_expect_equivalentWeightInPound() {
-        assertEquals(3.4, weightService.convertToImperial(7.5));
+        assertEquals(16.54, weightService.convertToImperial(7.5));
     }
 
     @Test
     public void when_convertingAWeightInPound_expect_equivalentWeightInKilogram() {
-        assertEquals(26.89, weightService.convertToImperial(12.2));
+        assertEquals(5.53, weightService.convertToMetric(12.2));
     }
 
 }
