@@ -1,7 +1,8 @@
 package com.ayo.demo.infrastructure.web;
 
-import com.ayo.demo.service.AreaService;
-import com.ayo.demo.service.TemperatureService;
+import com.ayo.demo.service.convertor.ConversionType;
+import com.ayo.demo.service.convertor.ConvertorService;
+import com.ayo.demo.service.convertor.UnitType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,49 +16,46 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/convert")
 public class ConversionResource {
 
-    private final TemperatureService temperatureService;
-    private final AreaService areaService;
+    private final ConvertorService convertorService;
 
     @Autowired
-    public ConversionResource(final TemperatureService temperatureService,
-                              final AreaService areaService) {
-        this.temperatureService = temperatureService;
-        this.areaService = areaService;
+    public ConversionResource(final ConvertorService convertorService) {
+        this.convertorService = convertorService;
     }
 
-    @RequestMapping(value = "/temperature/fahrenheit/{value}/to/celsius",
+    @RequestMapping(value = "/temperature/to-metric/{value}",
             method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
     public ResponseEntity<Double> convertFahrenheitToCelsius(@PathVariable final Double value) {
-        return temperatureService.convertFahrenheitToCelsius(value);
+        return convertorService.convert(ConversionType.TEMPERATURE, UnitType.METRIC, value);
     }
 
-    @RequestMapping(value = "/temperature/celsius/{value}/to/fahrenheit",
+    @RequestMapping(value = "/temperature/to-imperial/{value}",
             method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
     public ResponseEntity<Double> convertCelsiusToFahrenheit(@PathVariable final Double value) {
-        return temperatureService.convertCelsiusToFahrenheit(value);
+        return convertorService.convert(ConversionType.TEMPERATURE, UnitType.IMPERIAL, value);
     }
 
-    @RequestMapping(value = "/area/acre/{value}/to/hectare",
+    @RequestMapping(value = "/area/to-metric/{value}",
             method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
     public ResponseEntity<Double> convertAcreToHectare(@PathVariable final Double value) {
-        return areaService.convertAcreToHectare(value);
+        return convertorService.convert(ConversionType.AREA, UnitType.METRIC, value);
     }
 
-    @RequestMapping(value = "/area/hectare/{value}/to/acre",
+    @RequestMapping(value = "/area/to-imperial/{value}",
             method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
     public ResponseEntity<Double> convertHectareToAcre(@PathVariable final Double value) {
-        return areaService.convertHectareToAcre(value);
+        return convertorService.convert(ConversionType.AREA, UnitType.IMPERIAL, value);
     }
 }

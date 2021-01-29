@@ -1,6 +1,5 @@
 package com.ayo.demo.infrastructure.web;
 
-import org.apache.commons.math3.util.Precision;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -28,9 +27,10 @@ public class ConversionResourceTest {
 
     @Test
     public void givenACelsiusValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
-        double value = 55.2;
+        double fahrenheitValue = 55.2;
+        double celsiusValue = 12.89;
         HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
-        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/fahrenheit/" + value + "/to/celsius"),
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/to-metric/" + fahrenheitValue),
                 HttpMethod.GET,
                 entity,
                 Double.class);
@@ -38,14 +38,15 @@ public class ConversionResourceTest {
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), Precision.round((value - 32) / 1.8, 2));
+        assertEquals(responseEntity.getBody(), celsiusValue);
     }
 
     @Test
     public void givenAFahrenheitValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
-        double value = 55.2;
+        double celsiusValue = 55.2;
+        double fahrenheitValue = 131.36;
         HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
-        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/celsius/" + value + "/to/fahrenheit"),
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/to-imperial/" + celsiusValue),
                 HttpMethod.GET,
                 entity,
                 Double.class);
@@ -53,7 +54,7 @@ public class ConversionResourceTest {
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), Precision.round((value * 1.8) + 32, 2));
+        assertEquals(responseEntity.getBody(), fahrenheitValue);
     }
 
     private String createUrlWithPort(final String uri) {

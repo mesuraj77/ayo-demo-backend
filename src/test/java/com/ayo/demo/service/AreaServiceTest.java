@@ -6,8 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,18 +18,6 @@ public class AreaServiceTest {
     @BeforeAll
     static void setup() {
         MockitoAnnotations.openMocks(AreaServiceTest.class);
-    }
-
-    @Test
-    public void when_callingForAnAcreResponseEntity_expect_successfulConversionToImperialInResponseEntity() {
-        ResponseEntity<Double> response = new ResponseEntity<>(136.40, HttpStatus.OK);
-        assertEquals(response, areaService.convertHectareToAcre(55.2));
-    }
-
-    @Test
-    public void when_callingForAnHectareResponseEntity_expect_successfulConversionToMetricInResponseEntity() {
-        ResponseEntity<Double> response = new ResponseEntity<>(22.34, HttpStatus.OK);
-        assertEquals(response, areaService.convertAcreToHectare(55.2));
     }
 
     @Test

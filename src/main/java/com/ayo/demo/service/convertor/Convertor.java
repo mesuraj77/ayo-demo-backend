@@ -1,4 +1,4 @@
-package com.ayo.demo.service;
+package com.ayo.demo.service.convertor;
 
 public interface Convertor {
 
