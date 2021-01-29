@@ -2,6 +2,7 @@ package com.ayo.demo.infrastructure.web;
 
 import com.ayo.demo.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,20 +22,20 @@ public class TemperatureResource {
     }
 
     @RequestMapping(value = "/convert/{value}/metric",
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
-    public Double convertValueToMetric(@PathVariable final Double value) {
-        return temperatureService.convertToMetric(value);
+    public ResponseEntity<Double> convertValueToMetric(@PathVariable final Double value) {
+        return temperatureService.convertImperialToMetric(value);
     }
 
     @RequestMapping(value = "/convert/{value}/imperial",
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces = {
                     APPLICATION_JSON_VALUE,
             })
-    public Double convertValueToImperial(@PathVariable final Double value) {
-        return temperatureService.convertToImperial(value);
+    public ResponseEntity<Double> convertValueToImperial(@PathVariable final Double value) {
+        return temperatureService.convertMetricToImperial(value);
     }
 }
