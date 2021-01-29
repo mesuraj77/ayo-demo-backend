@@ -47,11 +47,11 @@ specifying the type on a different path variable. There are, as mentioned below,
 specified on the endpoint.
 
 The measurements selected were:
-1. Temperature - allowing conversions between Fahrenheit and Celsius
-2. Area - allowing conversions between Acre and Hectare
-3. Length - allowing conversions between Mile and Kilometer
-4. Volume - allowing conversions between Gallon and Litre
-5. Weight - allowing conversions between Pound and Kilogram
+1. Temperature - allowing conversions between Fahrenheit and Celsius (and vice-versa)
+2. Area - allowing conversions between Acre and Hectare (and vice-versa)
+3. Length - allowing conversions between Mile and Kilometer (and vice-versa)
+4. Volume - allowing conversions between Gallon and Litre (and vice-versa)
+5. Weight - allowing conversions between Pound and Kilogram (and vice-versa)
 
 Should a user specify an unknown system or unknown measurement, the API will respond accordingly with an appropriate
 error response code as well as an error message defining the issue and what are the possible solutions.
