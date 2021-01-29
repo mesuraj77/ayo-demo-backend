@@ -73,7 +73,7 @@ public class ConversionResource {
             produces = {
                     APPLICATION_JSON_VALUE,
             })
-    public ResponseEntity<Double> convertLitreToGallon(@PathVariable final Double value) {
+    public ResponseEntity<Double> convertKilometerToMile(@PathVariable final Double value) {
         return convertorService.convert(ConversionType.LENGTH, UnitType.IMPERIAL, value);
     }
 
@@ -91,7 +91,25 @@ public class ConversionResource {
             produces = {
                     APPLICATION_JSON_VALUE,
             })
-    public ResponseEntity<Double> convertKilometerToMile(@PathVariable final Double value) {
+    public ResponseEntity<Double> convertLitreToGallon(@PathVariable final Double value) {
         return convertorService.convert(ConversionType.VOLUME, UnitType.IMPERIAL, value);
+    }
+
+    @RequestMapping(value = "/weight/to-metric/{value}",
+            method = RequestMethod.GET,
+            produces = {
+                    APPLICATION_JSON_VALUE,
+            })
+    public ResponseEntity<Double> convertPoundToKilogram(@PathVariable final Double value) {
+        return convertorService.convert(ConversionType.WEIGHT, UnitType.METRIC, value);
+    }
+
+    @RequestMapping(value = "/weight/to-imperial/{value}",
+            method = RequestMethod.GET,
+            produces = {
+                    APPLICATION_JSON_VALUE,
+            })
+    public ResponseEntity<Double> convertKilogramToPound(@PathVariable final Double value) {
+        return convertorService.convert(ConversionType.WEIGHT, UnitType.IMPERIAL, value);
     }
 }

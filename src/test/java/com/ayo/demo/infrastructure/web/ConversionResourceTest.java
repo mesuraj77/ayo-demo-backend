@@ -154,6 +154,38 @@ public class ConversionResourceTest {
         assertEquals(gallonValue, responseEntity.getBody());
     }
 
+    @Test
+    public void givenPoundValueToConvert_whenExecuted_thenResponseContainsCorrectKilogramValueAndCorrectCode() throws IOException {
+        double poundValue = 5.2;
+        double kilogramValue = 2.36;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/weight/to-metric/" + poundValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(kilogramValue, responseEntity.getBody());
+    }
+
+    @Test
+    public void givenKilogramValueToConvert_whenExecuted_thenResponseContainsCorrectPoundValueAndCorrectCode() throws IOException {
+        double poundValue = 20.73;
+        double kilogramValue = 9.40;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/weight/to-imperial/" + kilogramValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(poundValue, responseEntity.getBody());
+    }
+
     private String createUrlWithPort(final String uri) {
         return "http://localhost:" + port + "/convert" + uri;
     }

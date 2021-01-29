@@ -4,6 +4,7 @@ import com.ayo.demo.service.AreaService;
 import com.ayo.demo.service.LengthService;
 import com.ayo.demo.service.TemperatureService;
 import com.ayo.demo.service.VolumeService;
+import com.ayo.demo.service.WeightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,16 +17,19 @@ public class ConvertorFactory {
     private final AreaService areaService;
     private final LengthService lengthService;
     private final VolumeService volumeService;
+    private final WeightService weightService;
 
     @Autowired
     public ConvertorFactory(final TemperatureService temperatureService,
                             final AreaService areaService,
                             final LengthService lengthService,
-                            final VolumeService volumeService) {
+                            final VolumeService volumeService,
+                            final WeightService weightService) {
         this.temperatureService = temperatureService;
         this.areaService = areaService;
         this.lengthService = lengthService;
         this.volumeService = volumeService;
+        this.weightService = weightService;
     }
 
     /**
@@ -46,6 +50,8 @@ public class ConvertorFactory {
             return lengthService;
         } else if (ConversionType.VOLUME.equals(type)) {
             return volumeService;
+        } else if (ConversionType.WEIGHT.equals(type)) {
+            return weightService;
         } else {
             throw new RuntimeException(format("Could not identify implementation for the conversion type [%s]",
                     type.name()));
