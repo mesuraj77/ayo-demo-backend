@@ -14,23 +14,23 @@ public class TemperatureService implements Convertor {
      * This function is used to convert temperature from Imperial (Fahrenheit)
      * into Metric (Celsius)
      *
-     * @param imperialValue a temperature in Imperial unit (Fahrenheit)
+     * @param fahrenheitValue a temperature in Imperial unit (Fahrenheit)
      * @return a Metric unit (Celsius) equivalent value rounded to two decimal places
      *
      */
-    public ResponseEntity<Double> convertImperialToMetric(final Double imperialValue) {
-        Double metricValue;
+    public ResponseEntity<Double> convertFahrenheitToCelsius(final Double fahrenheitValue) {
+        Double celsiusValue;
         HttpStatus status;
 
-        if (imperialValue != null) {
-            metricValue = this.convertToMetric(imperialValue);
+        if (fahrenheitValue != null) {
+            celsiusValue = this.convertToMetric(fahrenheitValue);
             status = HttpStatus.OK;
         } else {
-            metricValue = null;
+            celsiusValue = null;
             status = HttpStatus.BAD_REQUEST;
         }
 
-        return new ResponseEntity<>(metricValue, status);
+        return new ResponseEntity<>(celsiusValue, status);
 
     }
 
@@ -39,23 +39,23 @@ public class TemperatureService implements Convertor {
      * This function is used to convert temperature from Metric (Celsius)
      * into Imperial (Fahrenheit)
      *
-     * @param metricValue a temperature in Metric unit (Celsius)
+     * @param celsiusValue a temperature in Metric unit (Celsius)
      * @return an Imperial unit (Fahrenheit) equivalent value rounded to two decimal places
      *
      */
-    public ResponseEntity<Double> convertMetricToImperial(final Double metricValue) {
-        Double imperialValue;
+    public ResponseEntity<Double> convertCelsiusToFahrenheit(final Double celsiusValue) {
+        Double fahrenheitValue;
         HttpStatus status;
 
-        if (metricValue != null) {
-            imperialValue = this.convertToImperial(metricValue);
+        if (celsiusValue != null) {
+            fahrenheitValue = this.convertToImperial(celsiusValue);
             status = HttpStatus.OK;
         } else {
-            imperialValue = null;
+            fahrenheitValue = null;
             status = HttpStatus.BAD_REQUEST;
         }
 
-        return new ResponseEntity<>(imperialValue, status);
+        return new ResponseEntity<>(fahrenheitValue, status);
     }
 
     @Override

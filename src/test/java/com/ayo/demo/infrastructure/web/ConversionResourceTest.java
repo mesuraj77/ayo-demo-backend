@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class TemperatureResourceTest {
+public class ConversionResourceTest {
 
     private final TestRestTemplate testRestTemplate = new TestRestTemplate();
     private final HttpHeaders httpHeaders = new HttpHeaders();
@@ -30,7 +30,7 @@ public class TemperatureResourceTest {
     public void givenACelsiusValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
         double value = 55.2;
         HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
-        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/convert/" + value + "/metric"),
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/fahrenheit/" + value + "/to/celsius"),
                 HttpMethod.GET,
                 entity,
                 Double.class);
@@ -45,7 +45,7 @@ public class TemperatureResourceTest {
     public void givenAFahrenheitValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
         double value = 55.2;
         HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
-        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/convert/" + value + "/imperial"),
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/temperature/celsius/" + value + "/to/fahrenheit"),
                 HttpMethod.GET,
                 entity,
                 Double.class);
@@ -57,6 +57,6 @@ public class TemperatureResourceTest {
     }
 
     private String createUrlWithPort(final String uri) {
-        return "http://localhost:" + port + "/temperature" + uri;
+        return "http://localhost:" + port + "/convert" + uri;
     }
 }
