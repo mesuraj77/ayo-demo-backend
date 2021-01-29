@@ -31,9 +31,16 @@ cases to highlight the functionality to first time users.
 ## Solution
 
 As per the requirements, a solution was designed that exposed a single REST API with multiple conversions between two 
-known systems, namely metric and imperial.
+known systems, namely metric and imperial. 
+
+The application makes use of the <code>Convertor</code> interface which 
+specifies all convertors must be able to convert both to imperial and to metric. Each of the available services implement 
+this interface and contains formulas to conduct conversions.
+
+All endpoints trigger the convertor method on <code>ConvertorService.java</code> which will then by means of the
+<code>ConvertorFactory.java</code> injects the appropriate implementation of the <code>Convertor.java</code> interface.
 The endpoint allows a user (by means of triggering a single endpoint) to convert to metric, or to imperial, by specifying
-the desired system to convert to as a path variable. 
+the desired system to convert into, as a path variable on the URL. 
 
 Further to this, the user may use the same endpoint to trigger conversions between different types of measurements by 
 specifying the type on a different path variable. There are, as mentioned below, 5 units of measurement that may be
@@ -49,16 +56,10 @@ The measurements selected were:
 Should a user specify an unknown system or unknown measurement, the API will respond accordingly with an appropriate
 error response code as well as an error message defining the issue and what are the possible solutions.
 
-An example would be as follows: http://localhost:8080/convert/temperature/imperial/33.2 where <code>temperature</code> 
-would be a known measurement, <code>33.2</code> degrees celsius would be the value to convert and <codee>imperial</code> 
+An example would be as follows:
+http://localhost:8080/convert/temperature/imperial/33.2 where <code>temperature</code> 
+would be a known measurement, <code>33.2</code> degrees celsius would be the value to convert and <code>imperial</code> 
 would be  the system to convert the value into.
-
-The application makes use of the <code>Convertor</code> interface which specifies all convertors must be able to convert
-both to imperial and to metric. Each of the available services implement this interface and contains formulas to conduct
-conversions.
-
-All endpoints trigger the convertor method on <code>ConvertorService.java</code> which will then by means of the
-<code>ConvertorFactory.java</code> inject the appropriate implementation of the <code>Convertor.java</code> interface.
 
 ### Considerations
 
