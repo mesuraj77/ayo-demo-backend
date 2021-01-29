@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 public class TemperatureService implements Convertor {
 
     /**
-     * This function is used to convert temperature from Imperial (Fahrenheit)
-     * into Metric (Celsius)
+     * This function is used to convert temperature from Imperial (Fahrenheit) into Metric (Celsius)
      *
      * Disclaimer:
      * The formula used was taken from Google's Home Page and may defer slightly to more accurate measurements
