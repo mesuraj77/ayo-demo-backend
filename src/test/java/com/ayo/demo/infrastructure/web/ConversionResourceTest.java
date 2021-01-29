@@ -122,6 +122,38 @@ public class ConversionResourceTest {
         assertEquals(mileValue, responseEntity.getBody());
     }
 
+    @Test
+    public void givenAGallonValueToConvert_whenExecuted_thenResponseContainsCorrectLitreValueAndCorrectCode() throws IOException {
+        double gallonValue = 5.2;
+        double litreValue = 23.64;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/volume/to-metric/" + gallonValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(litreValue, responseEntity.getBody());
+    }
+
+    @Test
+    public void givenLitreValueToConvert_whenExecuted_thenResponseContainsCorrectGallonValueAndCorrectCode() throws IOException {
+        double gallonValue = 2.07;
+        double litreValue = 9.40;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/volume/to-imperial/" + litreValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(gallonValue, responseEntity.getBody());
+    }
+
     private String createUrlWithPort(final String uri) {
         return "http://localhost:" + port + "/convert" + uri;
     }
