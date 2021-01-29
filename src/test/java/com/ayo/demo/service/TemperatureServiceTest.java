@@ -1,5 +1,6 @@
 package com.ayo.demo.service;
 
+import org.apache.commons.math3.util.Precision;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,8 +22,12 @@ public class TemperatureServiceTest {
     }
 
     @Test
-    public  void when_degreesInCelsiusSpecified_expectConversionToFahrenheit() {
-        assertEquals((5.2 * 1.8) + 32, temperatureService.convertToMetric(5.2));
+    public  void when_degreesInFahrenheitSpecified_expectConversionToCelsius() {
+        assertEquals(Precision.round((55.2 - 32) / 1.8, 2), temperatureService.convertToMetric(55.2));
     }
 
+    @Test
+    public  void when_degreesInCelsiusSpecified_expectConversionToFahrenheit() {
+        assertEquals(Precision.round((5.2 * 1.8) + 32, 2), temperatureService.convertToImperial(5.2));
+    }
 }
