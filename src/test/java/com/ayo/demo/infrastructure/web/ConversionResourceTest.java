@@ -57,6 +57,39 @@ public class ConversionResourceTest {
         assertEquals(responseEntity.getBody(), fahrenheitValue);
     }
 
+
+    @Test
+    public void givenAnAcreValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
+        double acreValue = 55.2;
+        double hectareValue = 22.34;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/area/to-metric/" + acreValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(responseEntity.getBody(), hectareValue);
+    }
+
+    @Test
+    public void givenAHectareValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
+        double hectareValue = 55.2;
+        double acreValue = 136.40;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/area/to-imperial/" + hectareValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(responseEntity.getBody(), acreValue);
+    }
+
     private String createUrlWithPort(final String uri) {
         return "http://localhost:" + port + "/convert" + uri;
     }
