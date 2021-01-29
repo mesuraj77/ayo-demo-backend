@@ -58,4 +58,22 @@ public class ConversionResource {
     public ResponseEntity<Double> convertHectareToAcre(@PathVariable final Double value) {
         return convertorService.convert(ConversionType.AREA, UnitType.IMPERIAL, value);
     }
+
+    @RequestMapping(value = "/length/to-metric/{value}",
+            method = RequestMethod.GET,
+            produces = {
+                    APPLICATION_JSON_VALUE,
+            })
+    public ResponseEntity<Double> convertMileToKilometer(@PathVariable final Double value) {
+        return convertorService.convert(ConversionType.LENGTH, UnitType.METRIC, value);
+    }
+
+    @RequestMapping(value = "/length/to-imperial/{value}",
+            method = RequestMethod.GET,
+            produces = {
+                    APPLICATION_JSON_VALUE,
+            })
+    public ResponseEntity<Double> convertKilometerToMile(@PathVariable final Double value) {
+        return convertorService.convert(ConversionType.LENGTH, UnitType.IMPERIAL, value);
+    }
 }

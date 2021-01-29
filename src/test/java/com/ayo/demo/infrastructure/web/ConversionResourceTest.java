@@ -36,9 +36,9 @@ public class ConversionResourceTest {
                 Double.class);
 
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), celsiusValue);
+        assertEquals(celsiusValue, responseEntity.getBody());
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ConversionResourceTest {
                 Double.class);
 
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), fahrenheitValue);
+        assertEquals(fahrenheitValue, responseEntity.getBody());
     }
 
 
@@ -69,9 +69,9 @@ public class ConversionResourceTest {
                 Double.class);
 
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), hectareValue);
+        assertEquals(hectareValue, responseEntity.getBody());
     }
 
     @Test
@@ -85,9 +85,41 @@ public class ConversionResourceTest {
                 Double.class);
 
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCodeValue(), HttpStatus.OK.value());
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
         assertNotNull(responseEntity.getBody());
-        assertEquals(responseEntity.getBody(), acreValue);
+        assertEquals(acreValue, responseEntity.getBody());
+    }
+
+    @Test
+    public void givenAMileValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
+        double mileValue = 55.2;
+        double kilometerValue = 88.82;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/length/to-metric/" + mileValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(kilometerValue, responseEntity.getBody());
+    }
+
+    @Test
+    public void givenKilometerValueToConvert_whenExecuted_thenResponseContainsValueAndCorrectCode() throws IOException {
+        double mileValue = 61.78;
+        double kilometerValue = 99.40;
+        HttpEntity<String> entity = new HttpEntity<>(null, httpHeaders);
+        ResponseEntity<Double> responseEntity = testRestTemplate.exchange(createUrlWithPort("/length/to-imperial/" + kilometerValue),
+                HttpMethod.GET,
+                entity,
+                Double.class);
+
+        assertNotNull(responseEntity);
+        assertEquals(HttpStatus.OK.value(), responseEntity.getStatusCodeValue());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(mileValue, responseEntity.getBody());
     }
 
     private String createUrlWithPort(final String uri) {

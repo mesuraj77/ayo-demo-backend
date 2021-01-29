@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 public class AreaService implements Convertor {
 
     /**
-     * This function is used to convert area from Imperial (Acre) into Metric (Hectare)
+     * This function is used to convert area from Imperial (Acre) into Metric (Hectare).
+     *
+     * Disclaimer:
+     * The formula used was taken from Google's Home Page and may defer slightly to more accurate measurements
      *
      * @param acreValue an area in Imperial unit (Acre)
      * @return a Metric unit (Hectare) equivalent value rounded to two decimal places
@@ -23,6 +26,9 @@ public class AreaService implements Convertor {
 
     /**
      * This function is used to convert area from Metric (Hectare) into Imperial (Acre)
+     *
+     * Disclaimer:
+     * The formula used was taken from Google's Home Page and may defer slightly to more accurate measurements
      *
      * @param hectareValue an area in Metric unit (Hectare)
      * @return an Imperial unit (Acre) equivalent value rounded to two decimal places

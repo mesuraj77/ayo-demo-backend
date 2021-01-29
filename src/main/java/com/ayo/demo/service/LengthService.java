@@ -12,6 +12,9 @@ public class LengthService implements Convertor {
     /**
      * This function is used to convert length from Imperial (Mile) into Metric (Kilometer)
      *
+     * Disclaimer:
+     * The formula used was taken from Google's Home Page and may defer slightly to more accurate measurements
+     *
      * @param mileValue a length in Imperial unit (Mile)
      * @return a Metric unit (Kilometer) equivalent value rounded to two decimal places
      *
@@ -23,6 +26,9 @@ public class LengthService implements Convertor {
 
     /**
      * This function is used to convert length from Metric (Kilometer) into Imperial (Mile)
+     *
+     * Disclaimer:
+     * The formula used was taken from Google's Home Page and may defer slightly to more accurate measurements
      *
      * @param kilometerValue a length in Metric unit (Kilometer)
      * @return an Imperial unit (Mile) equivalent value rounded to two decimal places

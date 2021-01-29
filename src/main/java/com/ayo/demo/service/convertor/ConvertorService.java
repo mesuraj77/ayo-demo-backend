@@ -15,6 +15,19 @@ public class ConvertorService {
         this.convertorFactory = convertorFactory;
     }
 
+    /**
+     * To convert <code>inputValue</code> of any known type (<code>ConversionType</code>) of measurements between
+     * imperial and metric based on the directional parameter <code>toUnit</code>.
+     *
+     * @param type a known unit of measurement eg. temperature, area, length etc
+     * @param toUnit to type to convert it to (either imperial or metric)
+     * @param inputValue the number of units to convert
+     *
+     * @return the equivalent value of the converted unit of measurement
+     *
+     * @throws RuntimeException where an unknown output unit (neither Imperial nor Metric) has been requested for conversion
+     *
+     */
     public ResponseEntity<Double> convert(final ConversionType type, final UnitType toUnit, final Double inputValue) {
         Double convertedValue;
         HttpStatus status;
