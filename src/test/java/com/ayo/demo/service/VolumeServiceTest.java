@@ -29,6 +29,6 @@ public class VolumeServiceTest {
     @Test
     public void when_convertingGallonLitre_expect_correctValue() {
         // conversion is multiply by 4,546
-        assertEquals(73.19, volumeService.convertToImperial(16.1));
+        assertEquals(73.19, volumeService.convertToMetric(16.1));
     }
 }
