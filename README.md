@@ -13,8 +13,7 @@ The brief of the assignment was outlined as follows:
 8. Build system must use Maven.
 
 ## Tech Stack
-As per the brief, a Spring Boot application has been created using Maven was selected for dependency control and as the 
-build tool. 
+As per the brief, a Spring Boot application has been created using Maven for dependency management and as the build tool. 
 
 Unit tests are implemented using JUnit5 with Mockito for unit tests, and a short-lived Spring Boot Test instance 
 being spun up to facilitate integration testing by triggering all predefined endpoints.
@@ -25,16 +24,20 @@ your choice. The image can then be spun up using <code>docker run < your_tagged_
 port 8080 as per the <code>Dockerfile</code>. Alternatively you may use Docker Desktop to manage images and containers 
 once the image is built and tagged.
 
-A Postman collection has been specified which can be used to trigger all predefined endpoints. This file 
-<code>ayo-convertor.postman.json</code> may be imported into Postman for testing purposes.
+A Postman collection has been specified which can be used to trigger all predefined endpoints. The file 
+<code>ayo-convertor.postman.json</code> may be imported into Postman for testing purposes and includes two error test
+cases to highlight the functionality to first time users.
 
 ## Solution
 
 As per the requirements, a solution was designed that exposed a single REST API with multiple conversions between two 
 known systems, namely metric and imperial.
-The endpoint allows a user (by means of triggering a single endpoint) to convert to metric, or to imperial by specifying
-the desired system to convert to as a path variable, as well as the type of measurement on another path variable.
-There are, as mentioned below, 5 units of measurement that may be specified on the endpoint.
+The endpoint allows a user (by means of triggering a single endpoint) to convert to metric, or to imperial, by specifying
+the desired system to convert to as a path variable. 
+
+Further to this, the user may use the same endpoint to trigger conversions between different types of measurements by 
+specifying the type on a different path variable. There are, as mentioned below, 5 units of measurement that may be
+specified on the endpoint.
 
 The measurements selected were:
 1. Temperature - allowing conversions between Fahrenheit and Celsius
@@ -45,6 +48,10 @@ The measurements selected were:
 
 Should a user specify an unknown system or unknown measurement, the API will respond accordingly with an appropriate
 error response code as well as an error message defining the issue and what are the possible solutions.
+
+An example would be as follows: http://localhost:8080/convert/temperature/imperial/33.2 where <code>temperature</code> 
+would be a known measurement, <code>33.2</code> degrees celsius would be the value to convert and <codee>imperial</code> 
+would be  the system to convert the value into.
 
 The application makes use of the <code>Convertor</code> interface which specifies all convertors must be able to convert
 both to imperial and to metric. Each of the available services implement this interface and contains formulas to conduct
