@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,5 +93,13 @@ public class ConvertorService {
         }
 
         return systemType;
+    }
+
+    public ResponseEntity<List<String>> getMeasurements() {
+        return new ResponseEntity<>(Arrays.stream(ConversionType.values()).map(ConversionType::name).collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    public ResponseEntity<List<String>> getSiUnits() {
+        return new ResponseEntity<>(Arrays.stream(SystemType.values()).map(SystemType::name).collect(Collectors.toList()), HttpStatus.OK);
     }
 }
