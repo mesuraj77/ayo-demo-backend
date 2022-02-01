@@ -20,7 +20,8 @@ public class ConversionResource {
 
     @Autowired
     public ConversionResource(final ConvertorService convertorService) {
-        this.convertorService = convertorService;
+       System.out.println("suraj printing");
+    	this.convertorService = convertorService;
     }
 
     @RequestMapping(value = "/{measurement}/{toSystem}/{value}",
